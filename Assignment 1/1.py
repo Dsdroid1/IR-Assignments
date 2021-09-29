@@ -100,12 +100,10 @@ if __name__ == '__main__':
     while not done:
         word = input('Enter the word to search for:').strip().lower()
         result = tree.search(word)
-        if result is not None:
+        if result:
             print(f'Word "{word}" found at level {result}')
         else:
             print('Word does not exist in dictionary')
         y = input('Do you want to cotinue?(Y/N)')
         if y.lower() != 'y':
             done = True
-
-

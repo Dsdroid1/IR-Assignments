@@ -1,3 +1,4 @@
 this is a text file 
 this file is used to create the dictionary
 dictionary will be an optimal cost binary search tree
+this this file file file file
