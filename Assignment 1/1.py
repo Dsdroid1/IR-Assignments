@@ -53,7 +53,7 @@ def optimal_binary_search_tree(terms):
     for i in range(n):
         dp[i][i] = (terms[i][1],i)
 
-    # Subproblem length 2, 3, ... . L is chain length.
+    # Subproblem length 2, 3, ... . l is chain length.
     for l in range(2, n + 1):
         # i is row number in cost
         for i in range(n - l + 1): # i upto n-l
