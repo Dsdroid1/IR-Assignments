@@ -1,8 +1,5 @@
 from index_creation import create_index,clean_text
 
-# def binary_search(pt, lo, hi, current):
-
-#TESTED
 def binary_search(posting_list, prev_position, lo, hi):
     # lo = 0
     # hi = len(posting_list)-1
@@ -97,15 +94,17 @@ def nextPhrase(index,terms,position,doc_id,next):
     else:
         return nextPhrase(index,terms,v-n,doc_id,next)
 
-def nextPhraseOverCorpus(index, terms, next):
+def nextPhraseOverCorpus(index, terms, next,verbose=False):
     # Get the list of all docs that contain all of the required terms
     docs = set(index[terms[0]].keys())-set(['freq'])
     # print(docs)
+    count_matched = 0
     for term in terms:
         if index.get(term) is not None:
             docs = docs.intersection(set(index[term].keys()))
         else:
-            print('One of the terms is not in corpus, phrase cant be found')
+            if verbose:
+                print('One of the terms is not in corpus, phrase cant be found')
             return None
     # print(docs)
     found = False
@@ -114,10 +113,13 @@ def nextPhraseOverCorpus(index, terms, next):
         result = nextPhrase(index,terms,0,doc_id,next)
         if set(result) != set(['inf','inf']):
             found = True 
-            print(f'Phrase found in documnet with id: {doc_id}, at positions ({result[0]},{result[1]})')
+            count_matched += 1
+            if verbose:
+                print(f'Phrase found in documnet with id: {doc_id}, at positions ({result[0]},{result[1]})')
 
-    if found == False:
+    if found == False and verbose:
         print('Phrase not found in corpus')
+    return count_matched
 
 if __name__ == '__main__':
     # inverted_index = create_index()
